@@ -1,0 +1,25 @@
+$spacesizes: "5", "10", "12", "15", "20", "30", "30";
+
+$myspace: (
+  (theme: "mb", types: ("margin-bottom")),
+  (theme: "mt", types: ("margin-top")),
+  (theme: "mx", types: ("margin-left", "margin-right")),
+  (theme: "my", types: ("margin-top", "margin-top")),
+  (theme: "pt", types: ("margin-bottom")),
+  (theme: "pb", types: ("margin-top")),
+  (theme: "px", types: ("margin-left", "margin-right")),
+  (theme: "py", types: ("margin-top", "margin-top")),
+);
+
+@for $i from 1 through length($myspace) {  // 遍历数组
+  $item: nth($myspace, $i);  // 获取数组中第i项的值
+  $types: map-get($item, types);
+
+  @each $space in $spacesizes {
+    .#{map-get($item, theme)}-#{$space} {
+      @each $type in $types {
+        #{$type}:#{$space}px
+      }
+    }
+  }
+}
